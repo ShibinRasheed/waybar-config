@@ -1,0 +1,127 @@
+* {
+  font-family:
+    "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font Mono",
+    "JetBrainsMono NFP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #e0e0e0;
+  /* Off-white for better readability against dark backgrounds */
+}
+
+/* Base style for the "Islands" - Matched to Wallpaper Tones */
+#cpu,
+#memory,
+#disk,
+#workspaces,
+#network,
+#pulseaudio,
+#custom-backlight,
+#battery,
+#clock,
+#custom-media,
+#custom-pills,
+#power-profiles-daemon,
+#custom-caffeine,
+#tray {
+  background-color: rgba(15, 15, 15, 0.75);
+  /* Deep charcoal to match mountain shadows */
+  padding: 2px 12px;
+  margin: 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Very subtle frost border */
+  border-radius: 12px;
+  /* Slightly tighter rounding for a modern look */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Specific module widths to prevent "wobble" */
+#cpu,
+#memory,
+#battery,
+#pulseaudio {
+  min-width: 60px;
+}
+
+#clock {
+  min-width: 130px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Workspaces - The Center Island */
+#workspaces {
+  background-color: rgba(25, 25, 25, 0.85);
+  margin-top: 2px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #757575;
+  /* Muted gray for inactive */
+}
+
+#workspaces button.active {
+  color: #94e2d5;
+  /* Muted Mint/Cyan */
+  text-shadow: 0 0 12px rgba(148, 226, 213, 0.7);
+}
+
+#workspaces button.empty {
+  color: #3a3a3a;
+}
+
+/* Audio & Battery logic */
+#pulseaudio {
+  color: #b0b0b0;
+}
+
+#battery.charging {
+  color: #81a1c1;
+  /* Muted blue-ice color instead of bright green */
+}
+
+#battery.critical:not(.charging) {
+  background-color: rgba(191, 97, 106, 0.8);
+  /* Muted Nordic red */
+  color: #ffffff;
+}
+
+/* Remove margin for the very first/last pill if needed */
+#custom-pills {
+  margin-left: 0px;
+}
+
+#power-profiles-daemon {
+  color: rgba(144, 225, 237, 1);
+}
+
+#power-profiles-daemon.performance {
+  color: rgba(255, 120, 116, 1);
+}
+
+#power-profiles-daemon.power-saver {
+  color: rgba(135, 206, 125, 1);
+}
+
+#custom-caffeine {
+  font-size: 15px;
+  transition:
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+}
+
+#custom-caffeine.active {
+  color: #f9a825;
+  /* amber/coffee gold */
+}
+
+#custom-caffeine.inactive {
+  color: #888888;
+  /* muted grey when idle */
+}

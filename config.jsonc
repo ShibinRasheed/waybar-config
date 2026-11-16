@@ -1,0 +1,125 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 8,
+  "margin-bottom": 4,
+  "margin-left": 2,
+  "margin-right": 2,
+  "spacing": 4,
+
+  "modules-left": [
+    "power-profiles-daemon",
+    "custom/caffeine",
+    "network",
+    "battery",
+    "pulseaudio",
+    "custom/backlight",
+  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["custom/media", "clock"],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "active": "",
+      "default": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+    },
+    "persistent-workspaces": {
+      "*": 3, // 5 workspaces by default on every monitor
+    },
+    "sort-by-number": true,
+  },
+
+  "network": {
+    "interface": "wlo1",
+    "format": "{ifname}",
+    "format-wifi": "{icon}  {essid}",
+    "format-ethernet": "󰈀  {ipaddr}/{cidr}",
+    "format-disconnected": "󰤭  Disconnected",
+    "max-length": 50,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format": "Connected to {essid}",
+  },
+
+  "clock": {
+    "format-alt": "󰥔  {:%I:%M %p}",
+    "format": "󰥔  {:%a, %d. %b  %I:%M %p}",
+    "tooltip-format": "Date: {:%Y-%m-%d}",
+  },
+
+  "battery": {
+    "interval": 60,
+    "states": {
+      "warning": 20,
+      "critical": 10,
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "format-charging": "󰂄 {capacity}%",
+    "on-update": "~/.config/waybar/scripts/battery-notify.sh", // Runs ONLY when battery changes
+
+    "tooltip-format": "Battery is at {capacity}%",
+  },
+
+  "custom/backlight": {
+    "exec": "brightnessctl -m | cut -d, -f4 | tr -d '%'",
+    "interval": 1,
+    "format": "󰃠 {}%",
+    "tooltip": false,
+    "signal": 10,
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""],
+    },
+  },
+
+  "custom/pills": {
+    "format": " ", // Or your distro icon
+    "tooltip": false,
+  },
+  "custom/media": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 1, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": "",
+    },
+  },
+  "custom/caffeine": {
+    "exec": "~/.config/waybar/scripts/caffeine-toggle.sh status",
+    "on-click": "~/.config/waybar/scripts/caffeine-toggle.sh toggle && pkill -RTMIN+8 waybar",
+    "interval": 5,
+    "return-type": "json",
+    "signal": 8,
+  },
+}
